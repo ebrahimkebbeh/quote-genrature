@@ -4,4 +4,34 @@
         <title>Quote generature</title>
         <link rel="stylesheet" href="style.css">
     </head>
+    <body>
+        <div class="quote-box">
+            <h2>Quote of the day</h2>
+            <blockquote id="quote">loading...</blockquote>
+            <span id="author">loading</span>
+            <div>
+                <button onclick=" getqoute(api_url)">new Quote</button>
+                <button onclick="tweet()"><img src="tweet.png" alt="" srcset=""> tweet</button>
+            </div>
+        </div>
+        <script>
+            const quote = document.getElementById("quote")
+            const author = document.getElementById("author")
+            const  api_url = "https://api.quotable.io/random"
+
+            async function getqoute(url){
+                const response = await fetch(url);
+                var data = await response.json();
+                console.log(data); 
+                quote.innerHTML = data.content;
+                author.innerHTML = data.author;
+            }
+
+            getqoute(api_url)
+
+            function tweet(){
+                window.open(href="https://twitter.com/intent/tweet?text=" + quote.innerHTML + "---- by " + author.innerHTML, "Tweet window", "width=600, height=300")
+            }
+        </script>
+    </body>
 </html>
